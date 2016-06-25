@@ -2,9 +2,41 @@
 <html>
 <head>
   <title>DeliveryReport</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+
+    var data = google.visualization.arrayToDataTable([
+  //     ['Pilot', 'Money'],
+  //     [Fry,35000],
+  //     [Leela,131295],
+  //     [Amy,15000],
+  //     [Bender,355600]
+  // ]);
+      ['Pilot', 'Money']
+    <% pilots.each_with_index do |value, index| %>
+      ,['<%= value%>',<%= pmoney[index]%>]
+      <% end %>
+    ]);
+
+    var options = {
+      title: 'Pilot Value'
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+    chart.draw(data, options);
+  }
+  </script>
 </head>
 <body>
   <h1 style="color:rgb(184, 184, 184)">Delivery Report</h1>
+
+  <h2>Weekly Revenue</h2>
+  <h2><%= Delivery.weekly_total(dd) %><h2>
+
   <h2>Delivery Data Table</h2>
   <Table>
     <tr>
@@ -22,5 +54,40 @@
     </tr>
     <% end %>
   </table>
+
+  <h2>Pilot Productivity</h2>
+  <Table>
+    <tr>
+      <th>Pilot</th>
+      <th>Trips</th>
+      <th>Money</th>
+    </tr>
+    <% pilots.each_with_index do |value, index| %>
+    <tr>
+      <td><%= value %></td>
+      <td><%= trips[index]%></td>
+      <td><%= bonus[index] %></td>
+    </tr>
+    <% end %>
+  </table>
+
+
+  <h2>Planet Summary</h2>
+  <Table>
+    <tr>
+      <th>Planet</th>
+      <th>Money</th>
+    </tr>
+    <% planettable.each do |key, value| %>
+    <tr>
+      <td><%= key %></td>
+      <td><%= value %></td>
+    </tr>
+    <% end %>
+  </table>
+
+  <div id="piechart" style="width: 900px; height: 500px;"></div>
+
+
 </body>
 </html>

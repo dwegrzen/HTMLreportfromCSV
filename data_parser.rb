@@ -67,21 +67,22 @@ class Delivery
 
 end
 #collecting data to variables for ERB recall
-
-planmon = planets.map{|a| dd.inject(0){|sum,y| sum =+ y.money if y.destination==a ;sum}}
-combine = planets.zip(planets.map{|a| dd.inject(0){|sum,y| sum =+ y.money if y.destination==a ;sum}}) #takes planet list and combines with money by planet
-
-planetmon = Delivery.listmaker(dd,"destination").zip(Delivery.listmaker(dd,"destination").map{|a| Delivery.byplanet(dd,a)}) #array of planet and total money from each
+dd = CSV.read("planet_express_logs.csv", header_converters: :symbol, converters: :numeric,  headers:true).map{|x| x.to_hash}.map{|x| Delivery.new(x)}
 
 
+# planmon = planets.map{|a| dd.inject(0){|sum,y| sum =+ y.money if y.destination==a ;sum}}
+# combine = planets.zip(planets.map{|a| dd.inject(0){|sum,y| sum =+ y.money if y.destination==a ;sum}}) #takes planet list and combines with money by planet
+
+planettable = Delivery.listmaker(dd,"destination").zip(Delivery.listmaker(dd,"destination").map{|a| Delivery.byplanet(dd,a)}).to_h #hash of planet and total money from each,needed to answer last question
+
+pilots = Delivery.listmaker(dd,"pilot")
+trips = Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilottrips(dd,a)}
+bonus = Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilotbonus(dd,a)}
+pmoney = Delivery.listmaker(dd,"pilot").map{|a| Delivery.bypilot(dd,a)}
+
+# pilottable = Delivery.listmaker(dd,"pilot").zip(Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilottrips(dd,a)}).zip(Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilotbonus(dd,a)}) #array of pilots, trips, and bonus money from each, no index though
 
 
-# pilotlist.each do |p|
-#    pilotbonus<<(dd.inject(0){|sum,y| sum =+ y.bonus if y.pilot==p ;sum})
-#  end
-
-
-# dd = CSV.read("planet_express_logs.csv", header_converters: :symbol, converters: :numeric,  headers:true).map{|x| x.to_hash}.map{|x| Delivery.new(x)}
-
-
-# dd = hashdata.map{|x| Delivery.new(x)}
+new_file = File.open("./deliveryreport.html", "w+")
+new_file << ERB.new(File.read("index.html.erb")).result(binding)
+new_file.close
