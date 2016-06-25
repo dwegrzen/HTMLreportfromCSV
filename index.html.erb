@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DeliveryReport</title>
+</head>
+<body>
+  <h1 style="color:rgb(184, 184, 184)">Delivery Report</h1>
+  <h2>Delivery Data Table</h2>
+  <Table>
+    <tr>
+      <th>Destination</th>
+      <th>Shipment</th>
+      <th>Crates</th>
+      <th>Money</th>
+    </tr>
+    <% dd.collect do |delivery| %>
+    <tr>
+      <td><%= delivery.destination %></td>
+      <td><%= delivery.shipment%></td>
+      <td><%= delivery.crates %></td>
+      <td><%= delivery.money %></td>
+    </tr>
+    <% end %>
+  </table>
+</body>
+</html>
