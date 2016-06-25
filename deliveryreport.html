@@ -9,12 +9,6 @@
   function drawChart() {
 
     var data = google.visualization.arrayToDataTable([
-  //     ['Pilot', 'Money'],
-  //     [Fry,35000],
-  //     [Leela,131295],
-  //     [Amy,15000],
-  //     [Bender,355600]
-  // ]);
       ['Pilot', 'Money']
     
       ,['Fry',35000]
@@ -28,7 +22,11 @@
     ]);
 
     var options = {
-      title: 'Pilot Value'
+      title: 'Revenue by Pilot',
+      backgroundColor: 'none',
+      colors: ['#f2f2f2','#9d9d9d','#3e3e40','#470000'],
+      titleTextStyle: { color: 'white',
+                        fontSize: 16},
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -36,180 +34,204 @@
     chart.draw(data, options);
   }
   </script>
+  <meta name="description" content="FuturamaCo Delivery Report">
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="css/main.css" />
+
 </head>
 <body>
-  <h1 style="color:rgb(184, 184, 184)">Delivery Report</h1>
+  <div class="container-fluid main">
+    <h1 class="text-center">Planet Express Delivery Report</h1>
 
-  <h2>Weekly Revenue</h2>
-  <h2>536895<h2>
-
-  <h2>Delivery Data Table</h2>
-  <Table>
-    <tr>
-      <th>Destination</th>
-      <th>Shipment</th>
-      <th>Crates</th>
-      <th>Money</th>
-    </tr>
-    
-    <tr>
-      <td>Earth</td>
-      <td>Hamburgers</td>
-      <td>150</td>
-      <td>30000</td>
-    </tr>
-    
-    <tr>
-      <td>Moon</td>
-      <td>Tacos</td>
-      <td>33</td>
-      <td>44500</td>
-    </tr>
-    
-    <tr>
-      <td>Earth</td>
-      <td>Movies</td>
-      <td>34</td>
-      <td>5000</td>
-    </tr>
-    
-    <tr>
-      <td>Mars</td>
-      <td>BBQ Sauce</td>
-      <td>999</td>
-      <td>15000</td>
-    </tr>
-    
-    <tr>
-      <td>Uranus</td>
-      <td>Whiskey</td>
-      <td>1000</td>
-      <td>345600</td>
-    </tr>
-    
-    <tr>
-      <td>Jupiter</td>
-      <td>Books</td>
-      <td>10</td>
-      <td>3451</td>
-    </tr>
-    
-    <tr>
-      <td>Pluto</td>
-      <td>Beer</td>
-      <td>100</td>
-      <td>2344</td>
-    </tr>
-    
-    <tr>
-      <td>Uranus</td>
-      <td>Pizza</td>
-      <td>66</td>
-      <td>10000</td>
-    </tr>
-    
-    <tr>
-      <td>Saturn</td>
-      <td>Pizza</td>
-      <td>26</td>
-      <td>1000</td>
-    </tr>
-    
-    <tr>
-      <td>Mercury</td>
-      <td>Pizza</td>
-      <td>36</td>
-      <td>80000</td>
-    </tr>
-    
-  </table>
-
-  <h2>Pilot Productivity</h2>
-  <Table>
-    <tr>
-      <th>Pilot</th>
-      <th>Trips</th>
-      <th>Money</th>
-    </tr>
-    
-    <tr>
-      <td>Fry</td>
-      <td>2</td>
-      <td>3500.0</td>
-    </tr>
-    
-    <tr>
-      <td>Leela</td>
-      <td>5</td>
-      <td>13129.5</td>
-    </tr>
-    
-    <tr>
-      <td>Amy</td>
-      <td>1</td>
-      <td>1500.0</td>
-    </tr>
-    
-    <tr>
-      <td>Bender</td>
-      <td>2</td>
-      <td>35560.0</td>
-    </tr>
-    
-  </table>
-
-
-  <h2>Planet Summary</h2>
-  <Table>
-    <tr>
-      <th>Planet</th>
-      <th>Money</th>
-    </tr>
-    
-    <tr>
-      <td>Earth</td>
-      <td>35000</td>
-    </tr>
-    
-    <tr>
-      <td>Moon</td>
-      <td>44500</td>
-    </tr>
-    
-    <tr>
-      <td>Mars</td>
-      <td>15000</td>
-    </tr>
-    
-    <tr>
-      <td>Uranus</td>
-      <td>355600</td>
-    </tr>
-    
-    <tr>
-      <td>Jupiter</td>
-      <td>3451</td>
-    </tr>
-    
-    <tr>
-      <td>Pluto</td>
-      <td>2344</td>
-    </tr>
-    
-    <tr>
-      <td>Saturn</td>
-      <td>1000</td>
-    </tr>
-    
-    <tr>
-      <td>Mercury</td>
-      <td>80000</td>
-    </tr>
-    
-  </table>
-
-  <div id="piechart" style="width: 900px; height: 500px;"></div>
-
-
+    <h2>Weekly Revenue</h2>
+    <h3>$ 536895</h3>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+        <h2>Delivery Summary</h2>
+        <Table class="table table-condensed table-bordered table-striped table-hover">
+          <tr class="danger">
+            <th>Destination</th>
+            <th>Shipment</th>
+            <th>Crates</th>
+            <th>Money</th>
+          </tr>
+          
+          <tr>
+            <td>Earth</td>
+            <td>Hamburgers</td>
+            <td>150</td>
+            <td>30000</td>
+          </tr>
+          
+          <tr>
+            <td>Moon</td>
+            <td>Tacos</td>
+            <td>33</td>
+            <td>44500</td>
+          </tr>
+          
+          <tr>
+            <td>Earth</td>
+            <td>Movies</td>
+            <td>34</td>
+            <td>5000</td>
+          </tr>
+          
+          <tr>
+            <td>Mars</td>
+            <td>BBQ Sauce</td>
+            <td>999</td>
+            <td>15000</td>
+          </tr>
+          
+          <tr>
+            <td>Uranus</td>
+            <td>Whiskey</td>
+            <td>1000</td>
+            <td>345600</td>
+          </tr>
+          
+          <tr>
+            <td>Jupiter</td>
+            <td>Books</td>
+            <td>10</td>
+            <td>3451</td>
+          </tr>
+          
+          <tr>
+            <td>Pluto</td>
+            <td>Beer</td>
+            <td>100</td>
+            <td>2344</td>
+          </tr>
+          
+          <tr>
+            <td>Uranus</td>
+            <td>Pizza</td>
+            <td>66</td>
+            <td>10000</td>
+          </tr>
+          
+          <tr>
+            <td>Saturn</td>
+            <td>Pizza</td>
+            <td>26</td>
+            <td>1000</td>
+          </tr>
+          
+          <tr>
+            <td>Mercury</td>
+            <td>Pizza</td>
+            <td>36</td>
+            <td>80000</td>
+          </tr>
+          
+        </table>
+        </div>
+        <div class="col-sm-6">
+          <h2>Pilot Productivity</h2>
+          <Table class="table table-condensed table-bordered table-striped table-hover">
+            <tr class="danger">
+              <th>Pilot</th>
+              <th>Trips</th>
+              <th>Bonus</th>
+            </tr>
+          
+            <tr>
+              <td>Fry</td>
+              <td>2</td>
+              <td>3500.0</td>
+            </tr>
+          
+            <tr>
+              <td>Leela</td>
+              <td>5</td>
+              <td>13129.5</td>
+            </tr>
+          
+            <tr>
+              <td>Amy</td>
+              <td>1</td>
+              <td>1500.0</td>
+            </tr>
+          
+            <tr>
+              <td>Bender</td>
+              <td>2</td>
+              <td>35560.0</td>
+            </tr>
+          
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <h2>Planet Summary</h2>
+          <Table class="table table-condensed table-bordered table-striped table-hover">
+            <tr class="danger">
+              <th>Planet</th>
+              <th>Money</th>
+            </tr>
+            
+            <tr>
+              <td>Earth</td>
+              <td>35000</td>
+            </tr>
+            
+            <tr>
+              <td>Moon</td>
+              <td>44500</td>
+            </tr>
+            
+            <tr>
+              <td>Mars</td>
+              <td>15000</td>
+            </tr>
+            
+            <tr>
+              <td>Uranus</td>
+              <td>355600</td>
+            </tr>
+            
+            <tr>
+              <td>Jupiter</td>
+              <td>3451</td>
+            </tr>
+            
+            <tr>
+              <td>Pluto</td>
+              <td>2344</td>
+            </tr>
+            
+            <tr>
+              <td>Saturn</td>
+              <td>1000</td>
+            </tr>
+            
+            <tr>
+              <td>Mercury</td>
+              <td>80000</td>
+            </tr>
+            
+          </table>
+        </div>
+        <div class="col-sm-8">
+          <div id="piechart" style="width: 900px; height: 500px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

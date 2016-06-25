@@ -9,12 +9,6 @@
   function drawChart() {
 
     var data = google.visualization.arrayToDataTable([
-  //     ['Pilot', 'Money'],
-  //     [Fry,35000],
-  //     [Leela,131295],
-  //     [Amy,15000],
-  //     [Bender,355600]
-  // ]);
       ['Pilot', 'Money']
     <% pilots.each_with_index do |value, index| %>
       ,['<%= value%>',<%= pmoney[index]%>]
@@ -22,7 +16,11 @@
     ]);
 
     var options = {
-      title: 'Pilot Value'
+      title: 'Revenue by Pilot',
+      backgroundColor: 'none',
+      colors: ['#f2f2f2','#9d9d9d','#3e3e40','#470000'],
+      titleTextStyle: { color: 'white',
+                        fontSize: 16},
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -30,64 +28,88 @@
     chart.draw(data, options);
   }
   </script>
+  <meta name="description" content="FuturamaCo Delivery Report">
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="css/main.css" />
+
 </head>
 <body>
-  <h1 style="color:rgb(184, 184, 184)">Delivery Report</h1>
+  <div class="container-fluid main">
+    <h1 class="text-center">Planet Express Delivery Report</h1>
 
-  <h2>Weekly Revenue</h2>
-  <h2><%= Delivery.weekly_total(dd) %><h2>
-
-  <h2>Delivery Data Table</h2>
-  <Table>
-    <tr>
-      <th>Destination</th>
-      <th>Shipment</th>
-      <th>Crates</th>
-      <th>Money</th>
-    </tr>
-    <% dd.collect do |delivery| %>
-    <tr>
-      <td><%= delivery.destination %></td>
-      <td><%= delivery.shipment%></td>
-      <td><%= delivery.crates %></td>
-      <td><%= delivery.money %></td>
-    </tr>
-    <% end %>
-  </table>
-
-  <h2>Pilot Productivity</h2>
-  <Table>
-    <tr>
-      <th>Pilot</th>
-      <th>Trips</th>
-      <th>Money</th>
-    </tr>
-    <% pilots.each_with_index do |value, index| %>
-    <tr>
-      <td><%= value %></td>
-      <td><%= trips[index]%></td>
-      <td><%= bonus[index] %></td>
-    </tr>
-    <% end %>
-  </table>
-
-
-  <h2>Planet Summary</h2>
-  <Table>
-    <tr>
-      <th>Planet</th>
-      <th>Money</th>
-    </tr>
-    <% planettable.each do |key, value| %>
-    <tr>
-      <td><%= key %></td>
-      <td><%= value %></td>
-    </tr>
-    <% end %>
-  </table>
-
-  <div id="piechart" style="width: 900px; height: 500px;"></div>
-
-
+    <h2>Weekly Revenue</h2>
+    <h3>$ <%= Delivery.weekly_total(dd) %></h3>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+        <h2>Delivery Summary</h2>
+        <Table class="table table-condensed table-bordered table-striped table-hover">
+          <tr class="danger">
+            <th>Destination</th>
+            <th>Shipment</th>
+            <th>Crates</th>
+            <th>Money</th>
+          </tr>
+          <% dd.collect do |delivery| %>
+          <tr>
+            <td><%= delivery.destination %></td>
+            <td><%= delivery.shipment%></td>
+            <td><%= delivery.crates %></td>
+            <td><%= delivery.money %></td>
+          </tr>
+          <% end %>
+        </table>
+        </div>
+        <div class="col-sm-6">
+          <h2>Pilot Productivity</h2>
+          <Table class="table table-condensed table-bordered table-striped table-hover">
+            <tr class="danger">
+              <th>Pilot</th>
+              <th>Trips</th>
+              <th>Bonus</th>
+            </tr>
+          <% pilots.each_with_index do |value, index| %>
+            <tr>
+              <td><%= value %></td>
+              <td><%= trips[index]%></td>
+              <td><%= bonus[index] %></td>
+            </tr>
+          <% end %>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <h2>Planet Summary</h2>
+          <Table class="table table-condensed table-bordered table-striped table-hover">
+            <tr class="danger">
+              <th>Planet</th>
+              <th>Money</th>
+            </tr>
+            <% planettable.each do |key, value| %>
+            <tr>
+              <td><%= key %></td>
+              <td><%= value %></td>
+            </tr>
+            <% end %>
+          </table>
+        </div>
+        <div class="col-sm-8">
+          <div id="piechart" style="width: 900px; height: 500px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

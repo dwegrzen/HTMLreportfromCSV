@@ -1,0 +1,25 @@
+* {
+  /*border: 1px solid blue;*/
+}
+body {
+  background: linear-gradient(rgba(122, 15, 4, 0.25), rgba(122, 15, 4, 0.25)), url(../images/planetexpress.png) no-repeat center center fixed ;
+  /*background-size:cover;*/
+  height: 50%
+}
+
+h1 {
+  color:#C02437
+}
+h2 {
+  border-bottom: 2px solid rgb(124, 124, 124);
+  color:#C02437
+
+}
+
+h3 {
+  font-size: 40px;
+}
+
+table {
+  background-color: white;
+}
