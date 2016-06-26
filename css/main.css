@@ -1,25 +1,23 @@
 * {
-  /*border: 1px solid blue;*/
 }
 body {
-  background: linear-gradient(rgba(122, 15, 4, 0.25), rgba(122, 15, 4, 0.25)), url(../images/planetexpress.png) no-repeat center center fixed ;
-  /*background-size:cover;*/
-  height: 50%
+    background: linear-gradient(rgba(122, 15, 4, 0.25), rgba(122, 15, 4, 0.25)), url(../images/planetexpress.png) no-repeat center center fixed;
+    height: 75%;
 }
-
 h1 {
-  color:#C02437
+    color: #C02437
 }
 h2 {
-  border-bottom: 2px solid rgb(124, 124, 124);
-  color:#C02437
-
+    border-bottom: 2px solid rgb(124, 124, 124);
+    color: #C02437
 }
-
 h3 {
-  font-size: 40px;
+    font-size: 50px;
 }
-
 table {
-  background-color: white;
+    background-color: white;
+    box-shadow: 0 0 0 1.5px #a3a3a3;
+}
+#gif {
+    border-radius: 10px;
 }

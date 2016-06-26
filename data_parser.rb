@@ -5,29 +5,36 @@ hashdata = CSV.read("planet_express_logs.csv", header_converters: :symbol, conve
 
 
 class Delivery
-  attr_accessor :destination, :shipment, :crates, :money, :pilot, :bonus, :net
+
+  attr_accessor :destination, :shipment, :crates, :money, :pilot, :bonus, :net, :pilot2
+
+  @@pmap = {"Earth" => "Fry", "Mars" => "Amy", "Uranus" => "Bender", "Moon" => "Leela", "Mercury" => "Leela", "Saturn" => "Leela" ,"Pluto" => "Leela","Jupiter" => "Leela"}
 
   def initialize(hash)
     @destination = hash[:destination]
     @shipment = hash[:shipment]
     @crates = hash[:crates]
     @money = hash[:money]
-    findpilot
+    findpilot(hash[:destination])
     bonuscalc
     netcalc
   end
 
-  def findpilot
-    if destination == "Earth"
-      self.pilot = "Fry"
-    elsif destination == "Mars"
-      self.pilot = "Amy"
-    elsif destination == "Uranus"
-      self.pilot = "Bender"
-    else
-      self.pilot = "Leela"
-    end
+  def findpilot(destination) #new pilot finding method, fewer lines
+    self.pilot = @@pmap[destination]
   end
+
+  # def findpilotold                     #old method, 11 lines, created findpilot to meet epic <10 line method
+  #   if destination == "Earth"
+  #     self.pilot2 = "Fry"
+  #   elsif destination == "Mars"
+  #     self.pilot2 = "Amy"
+  #   elsif destination == "Uranus"
+  #     self.pilot2 = "Bender"
+  #   else
+  #     self.pilot2 = "Leela"
+  #   end
+  # end
 
   def bonuscalc
     self.bonus = money * 0.1
@@ -64,23 +71,18 @@ class Delivery
   def self.seldel(array,name) #selects entire delivery row by the pilot
     array.select{|x| x.pilot==name}
   end
-
 end
-#collecting data to variables for ERB recall
-dd = CSV.read("planet_express_logs.csv", header_converters: :symbol, converters: :numeric,  headers:true).map{|x| x.to_hash}.map{|x| Delivery.new(x)}
 
+dd = CSV.read("planet_express_logs.csv", header_converters: :symbol, converters: :numeric,  headers:true).map{|x| x.to_hash}.map{|x| Delivery.new(x)} #main delivery class object
 
-# planmon = planets.map{|a| dd.inject(0){|sum,y| sum =+ y.money if y.destination==a ;sum}}
-# combine = planets.zip(planets.map{|a| dd.inject(0){|sum,y| sum =+ y.money if y.destination==a ;sum}}) #takes planet list and combines with money by planet
+planettable = Delivery.listmaker(dd,"destination").zip(Delivery.listmaker(dd,"destination").map{|a| Delivery.byplanet(dd,a)}).to_h #hash of planet and total money from each, used for planet summary table
 
-planettable = Delivery.listmaker(dd,"destination").zip(Delivery.listmaker(dd,"destination").map{|a| Delivery.byplanet(dd,a)}).to_h #hash of planet and total money from each,needed to answer last question
+pilots = Delivery.listmaker(dd,"pilot") #for pilot productivity table
+trips = Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilottrips(dd,a)} #for pilot productivity table
+bonus = Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilotbonus(dd,a)} #for pilot productivity table
+pmoney = Delivery.listmaker(dd,"pilot").map{|a| Delivery.bypilot(dd,a)} #for pie chart
 
-pilots = Delivery.listmaker(dd,"pilot")
-trips = Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilottrips(dd,a)}
-bonus = Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilotbonus(dd,a)}
-pmoney = Delivery.listmaker(dd,"pilot").map{|a| Delivery.bypilot(dd,a)}
-
-# pilottable = Delivery.listmaker(dd,"pilot").zip(Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilottrips(dd,a)}).zip(Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilotbonus(dd,a)}) #array of pilots, trips, and bonus money from each, no index though
+# pilottable = Delivery.listmaker(dd,"pilot").zip(Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilottrips(dd,a)}).zip(Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilotbonus(dd,a)}) #array of [pilots], [trips], and [bonus] money from each, could not get to work with erb due indexing issues
 
 
 new_file = File.open("./deliveryreport.html", "w+")

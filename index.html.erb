@@ -18,9 +18,13 @@
     var options = {
       title: 'Revenue by Pilot',
       backgroundColor: 'none',
-      colors: ['#f2f2f2','#9d9d9d','#3e3e40','#470000'],
+      colors: ['#000000','#9d9d9d','#3e3e40','#470000'],
+      legend: {
+        textStyle: {color: 'white'},
+      },
       titleTextStyle: { color: 'white',
-                        fontSize: 16},
+      fontSize: 16
+      }
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -54,7 +58,7 @@
       <div class="row">
         <div class="col-sm-6">
         <h2>Delivery Summary</h2>
-        <Table class="table table-condensed table-bordered table-striped table-hover">
+        <Table class="table table-condensed table-bordered table-striped table-hover border-radius">
           <tr class="danger">
             <th>Destination</th>
             <th>Shipment</th>
@@ -109,6 +113,10 @@
           <div id="piechart" style="width: 900px; height: 500px;"></div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <img id="gif" src="http://i.imgur.com/kHhPvZT.gif" class="img-responsive center-block">
+        </div>
     </div>
   </div>
 </body>
