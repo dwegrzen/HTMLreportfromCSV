@@ -30,6 +30,10 @@ class Delivery
     money * 0.1
   end
 
+  def self.weekly_total(array) #determines the total weekly delivery
+    array.inject(0){|sum,x| sum += x.money}
+  end
+
   def self.pilotbonus(array,name) #determines the total bonus of the pilot
     array.inject(0){|sum,x| sum += x.bonuscalc if x.pilot == name;sum}
   end
@@ -60,6 +64,7 @@ pilots = Delivery.listmaker(dd,"pilot") #for pilot productivity table
 trips = Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilottrips(dd,a)} #for pilot productivity table
 bonus = Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilotbonus(dd,a)} #for pilot productivity table
 pmoney = Delivery.listmaker(dd,"pilot").map{|a| Delivery.bypilot(dd,a)} #for pie chart
+
 
 new_file = File.open("./deliveryreport.html", "w+")
 new_file << ERB.new(File.read("index.html.erb")).result(binding)
