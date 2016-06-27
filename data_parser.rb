@@ -30,10 +30,6 @@ class Delivery
     money * 0.1
   end
 
-  def self.weekly_total(array) #determines the total weekly delivery
-    array.inject(0){|sum,x| sum += x.money}
-  end
-
   def self.pilotbonus(array,name) #determines the total bonus of the pilot
     array.inject(0){|sum,x| sum += x.bonuscalc if x.pilot == name;sum}
   end
@@ -54,9 +50,6 @@ class Delivery
     array.collect{|x| x.send(item)}.uniq
   end
 
-  def self.seldel(array,name) #selects entire delivery row by the pilot
-    array.select{|x| x.pilot==name}
-  end
 end
 
 dd = CSV.read("planet_express_logs.csv", header_converters: :symbol, converters: :numeric,  headers:true).map{|x| x.to_hash}.map{|x| Delivery.new(x)} #main delivery class object
@@ -67,9 +60,6 @@ pilots = Delivery.listmaker(dd,"pilot") #for pilot productivity table
 trips = Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilottrips(dd,a)} #for pilot productivity table
 bonus = Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilotbonus(dd,a)} #for pilot productivity table
 pmoney = Delivery.listmaker(dd,"pilot").map{|a| Delivery.bypilot(dd,a)} #for pie chart
-
-# pilottable = Delivery.listmaker(dd,"pilot").zip(Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilottrips(dd,a)}).zip(Delivery.listmaker(dd,"pilot").map{|a| Delivery.pilotbonus(dd,a)}) #array of [pilots], [trips], and [bonus] money from each, could not get to work with erb due indexing issues
-
 
 new_file = File.open("./deliveryreport.html", "w+")
 new_file << ERB.new(File.read("index.html.erb")).result(binding)
