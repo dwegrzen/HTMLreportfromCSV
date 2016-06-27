@@ -43,10 +43,6 @@ class Delivery
     self.bonus = money * 0.1
   end
 
-  def netcalc
-    self.net = money - bonus
-  end
-
   def self.weekly_total(array) #determines the total weekly delivery
     array.inject(0){|sum,x| sum += x.money}
   end
