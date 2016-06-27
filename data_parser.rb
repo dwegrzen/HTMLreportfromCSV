@@ -25,7 +25,7 @@ class Delivery
     pilots.default = "Leela"
     pilots
   end
-  
+
   def bonuscalc
     money * 0.1
   end
@@ -35,7 +35,7 @@ class Delivery
   end
 
   def self.pilotbonus(array,name) #determines the total bonus of the pilot
-    array.inject(0){|sum,x| sum += x.bonus if x.pilot == name;sum}
+    array.inject(0){|sum,x| sum += x.bonuscalc if x.pilot == name;sum}
   end
 
   def self.pilottrips(array,name) #determines the number of trips for pilot
