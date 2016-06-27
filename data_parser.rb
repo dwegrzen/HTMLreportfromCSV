@@ -14,8 +14,6 @@ class Delivery
     @crates = hash[:crates]
     @money = hash[:money]
     @pilot = pilot_location[destination]
-    bonuscalc
-    netcalc
   end
 
   def pilot_location
@@ -27,20 +25,9 @@ class Delivery
     pilots.default = "Leela"
     pilots
   end
-  # def findpilotold                     #old method, 11 lines, created findpilot to meet epic <10 line method
-  #   if destination == "Earth"
-  #     self.pilot2 = "Fry"
-  #   elsif destination == "Mars"
-  #     self.pilot2 = "Amy"
-  #   elsif destination == "Uranus"
-  #     self.pilot2 = "Bender"
-  #   else
-  #     self.pilot2 = "Leela"
-  #   end
-  # end
-
+  
   def bonuscalc
-    self.bonus = money * 0.1
+    money * 0.1
   end
 
   def self.weekly_total(array) #determines the total weekly delivery
