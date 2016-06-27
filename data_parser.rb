@@ -8,22 +8,25 @@ class Delivery
 
   attr_accessor :destination, :shipment, :crates, :money, :pilot
 
-  @@pmap = {"Earth" => "Fry", "Mars" => "Amy", "Uranus" => "Bender", "Moon" => "Leela", "Mercury" => "Leela", "Saturn" => "Leela" ,"Pluto" => "Leela","Jupiter" => "Leela"}
-
   def initialize(hash)
     @destination = hash[:destination]
     @shipment = hash[:shipment]
     @crates = hash[:crates]
     @money = hash[:money]
-    findpilot(hash[:destination])
+    @pilot = pilot_location[destination]
     bonuscalc
     netcalc
   end
 
-  def findpilot(destination) #new pilot finding method, fewer lines
-    self.pilot = @@pmap[destination]
+  def pilot_location
+    pilots = {
+      "Earth" => "Fry",
+      "Mars" => "Amy",
+      "Uranus" => "Bender"
+    }
+    pilots.default = "Leela"
+    pilots
   end
-
   # def findpilotold                     #old method, 11 lines, created findpilot to meet epic <10 line method
   #   if destination == "Earth"
   #     self.pilot2 = "Fry"
