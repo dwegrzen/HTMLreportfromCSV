@@ -6,9 +6,7 @@ hashdata = CSV.read("planet_express_logs.csv", header_converters: :symbol, conve
 
 class Delivery
 
-  attr_accessor :destination, :shipment, :crates, :money, :pilot, :bonus, :net, :pilot2
-
-# I don't really understand your code, but I'm going to try to make some good comments
+  attr_accessor :destination, :shipment, :crates, :money, :pilot
 
   @@pmap = {"Earth" => "Fry", "Mars" => "Amy", "Uranus" => "Bender", "Moon" => "Leela", "Mercury" => "Leela", "Saturn" => "Leela" ,"Pluto" => "Leela","Jupiter" => "Leela"}
 
